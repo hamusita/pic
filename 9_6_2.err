@@ -1,0 +1,6 @@
+Message[302] C:\PIC\2016\9_6_2.ASM 59 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\9_6_2.ASM 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\9_6_2.ASM 62 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\PIC\2016\9_6_2.ASM 204 : Using default destination of 1 (file).
+Message[305] C:\PIC\2016\9_6_2.ASM 215 : Using default destination of 1 (file).
+Message[305] C:\PIC\2016\9_6_2.ASM 219 : Using default destination of 1 (file).

@@ -1,0 +1,54 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu May 26 17:10:42 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x0000c2
+       .config_2007_4_3.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000060      
+                            0x002007    0x002007      
+            98 out of 1094 program addresses used, program memory utilization is 8%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    LOOP1   0x000050    program     static C:\Pic\2016\4_3.asm      
+                    LOOP2   0x000057    program     static C:\Pic\2016\4_3.asm      
+                    LOOP3   0x00005d    program     static C:\Pic\2016\4_3.asm      
+                     MAIN   0x000000    program     static C:\Pic\2016\4_3.asm      
+                     SUB1   0x000006    program     static C:\Pic\2016\4_3.asm      
+                     SUB2   0x00001f    program     static C:\Pic\2016\4_3.asm      
+                     SUB3   0x00002e    program     static C:\Pic\2016\4_3.asm      
+                     SUB4   0x00003d    program     static C:\Pic\2016\4_3.asm      
+                   TIME05   0x00005b    program     static C:\Pic\2016\4_3.asm      
+                 TIME100U   0x00004c    program     static C:\Pic\2016\4_3.asm      
+                  TIME10M   0x000053    program     static C:\Pic\2016\4_3.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000000    program     static C:\Pic\2016\4_3.asm      
+                     SUB1   0x000006    program     static C:\Pic\2016\4_3.asm      
+                     SUB2   0x00001f    program     static C:\Pic\2016\4_3.asm      
+                     SUB3   0x00002e    program     static C:\Pic\2016\4_3.asm      
+                     SUB4   0x00003d    program     static C:\Pic\2016\4_3.asm      
+                 TIME100U   0x00004c    program     static C:\Pic\2016\4_3.asm      
+                    LOOP1   0x000050    program     static C:\Pic\2016\4_3.asm      
+                  TIME10M   0x000053    program     static C:\Pic\2016\4_3.asm      
+                    LOOP2   0x000057    program     static C:\Pic\2016\4_3.asm      
+                   TIME05   0x00005b    program     static C:\Pic\2016\4_3.asm      
+                    LOOP3   0x00005d    program     static C:\Pic\2016\4_3.asm      
+
+

@@ -1,0 +1,59 @@
+	LIST	P=PIC16F84A
+	#INCLUDE<P16F84A.INC>
+	
+	__CONFIG	_HS_OSC&_CP_OFF&_WDT_OFF&_PWRTE_ON
+
+;****変数領域確保***********************************************************		
+BIN		EQU	0CH
+BCD1	EQU	0DH
+BCD2	EQU	0EH
+CNT		EQU	0FH
+;*************************************************************************
+
+	ORG	0
+
+BCDC
+	CLRF	CNT
+	CLRF	BIN
+	CLRF	BCD1
+	CLRF	BCD2
+	MOVLW	D'8'	 ;8回繰り返す
+	MOVWF	CNT	 ;CNT=8
+	BCF		STATUS,C
+	MOVLW	B'10101010'	 ;ここに適当な数を入れる(255まで)
+	MOVWF	BIN	 ;BIN=?
+BCDC_2
+	RLF		BIN,F	 ;全体的に左に回す
+	RLF		BCD1,F
+	RLF		BCD2,F
+	BTFSC	STATUS,C ;DEC1に移動するビット(0=SKIP)
+	BSF		BCD1,0	 ;C=1
+	DECFSZ	CNT,F
+	GOTO	BCDC_6	 ;LOOP<8
+	GOTO	BCDC_5	 ;LOOP=8
+BCDC_6
+	MOVLW	0x03	 ;W=0x03
+	ADDWF	BCD1,F	 ;[BCD1]+03H
+	BTFSC	BCD1,3	 ;4bit => 5?
+	GOTO	BCDC_3	 ;     => 5 (5~)
+	MOVLW	0x03	 ;W=0x03
+	SUBWF	BCD1,F	 ;[BCD1]-03H
+BCDC_3
+	MOVLW	0x30	 ;W=0x30
+	ADDWF	BCD1,F	 ;[BCD1]+30H
+	BTFSC	BCD1,7	 ;8BIT =>5?
+	GOTO	BCDC_4	 ;     =>5 (5~)
+	MOVLW	0x30	 ;W=0x30
+	SUBWF	BCD1,F	 ;[BCD1]-30H
+BCDC_4
+	MOVLW	0x03	 ;W=0x03
+	ADDWF	BCD2,F	 ;[BCD2]-03H
+	BTFSC	BCD2,3	 ;12BIT =>5?
+	GOTO	BCDC_2	 ;	=>5 (5~)
+	MOVLW	0x03	 ;W=0x03
+	SUBWF	BCD2,F	 ;[BCD2]-03H
+	GOTO	BCDC_2
+BCDC_5
+	GOTO 	BCDC_5	;RETURNにするとCALLされた所に帰るよ！
+
+	END

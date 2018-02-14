@@ -1,0 +1,44 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Oct 11 10:24:59 2017
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x0000c2
+     .config_2007_8_2_2.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000060      
+                            0x002007    0x002007      
+            98 out of 2310 program addresses used, program memory utilization is 4%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   ADLOOP   0x00000d    program     static C:\Pic\2016\8_2_2.asm    
+                  ADSTART   0x00000b    program     static C:\Pic\2016\8_2_2.asm    
+                      BCD   0x00001f    program     static C:\Pic\2016\8_2_2.asm    
+                     LOOP   0x00001c    program     static C:\Pic\2016\8_2_2.asm    
+                     MAIN   0x000000    program     static C:\Pic\2016\8_2_2.asm    
+                  TIME20U   0x000015    program     static C:\Pic\2016\8_2_2.asm    
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000000    program     static C:\Pic\2016\8_2_2.asm    
+                  ADSTART   0x00000b    program     static C:\Pic\2016\8_2_2.asm    
+                   ADLOOP   0x00000d    program     static C:\Pic\2016\8_2_2.asm    
+                  TIME20U   0x000015    program     static C:\Pic\2016\8_2_2.asm    
+                     LOOP   0x00001c    program     static C:\Pic\2016\8_2_2.asm    
+                      BCD   0x00001f    program     static C:\Pic\2016\8_2_2.asm    
+
+

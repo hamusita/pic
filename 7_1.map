@@ -1,0 +1,50 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Oct 05 13:14:48 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000114
+       .config_2007_7_1.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000089      
+                            0x002007    0x002007      
+            139 out of 1094 program addresses used, program memory utilization is 12%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      BCD   0x000024    program     static C:\Pic\2016\7_1.asm      
+                     LOOP   0x000013    program     static C:\Pic\2016\7_1.asm      
+                    LOOP1   0x00001a    program     static C:\Pic\2016\7_1.asm      
+                    LOOP2   0x000020    program     static C:\Pic\2016\7_1.asm      
+                     MAIN   0x000000    program     static C:\Pic\2016\7_1.asm      
+                   MAINLP   0x000005    program     static C:\Pic\2016\7_1.asm      
+                   TIME01   0x00001e    program     static C:\Pic\2016\7_1.asm      
+                 TIME100U   0x00000f    program     static C:\Pic\2016\7_1.asm      
+                  TIME10M   0x000016    program     static C:\Pic\2016\7_1.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000000    program     static C:\Pic\2016\7_1.asm      
+                   MAINLP   0x000005    program     static C:\Pic\2016\7_1.asm      
+                 TIME100U   0x00000f    program     static C:\Pic\2016\7_1.asm      
+                     LOOP   0x000013    program     static C:\Pic\2016\7_1.asm      
+                  TIME10M   0x000016    program     static C:\Pic\2016\7_1.asm      
+                    LOOP1   0x00001a    program     static C:\Pic\2016\7_1.asm      
+                   TIME01   0x00001e    program     static C:\Pic\2016\7_1.asm      
+                    LOOP2   0x000020    program     static C:\Pic\2016\7_1.asm      
+                      BCD   0x000024    program     static C:\Pic\2016\7_1.asm      
+
+

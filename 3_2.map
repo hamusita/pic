@@ -1,0 +1,36 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri May 06 14:56:03 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000022
+       .config_2007_3_2.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000010      
+                            0x002007    0x002007      
+            18 out of 1094 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     LOOP   0x000006    program     static C:\Pic\2016\3_2.asm      
+                     MAIN   0x000000    program     static C:\Pic\2016\3_2.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000000    program     static C:\Pic\2016\3_2.asm      
+                     LOOP   0x000006    program     static C:\Pic\2016\3_2.asm      
+
+

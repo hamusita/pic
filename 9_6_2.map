@@ -1,0 +1,74 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Dec 09 17:14:17 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x00015e
+     .config_2007_9_6_2.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000b2      
+                            0x002007    0x002007      
+            177 out of 1094 program addresses used, program memory utilization is 16%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     BODY   0x000007    program     static C:\Pic\2016\9_6_2.asm    
+                    CHECK   0x000052    program     static C:\Pic\2016\9_6_2.asm    
+                    CRECV   0x000028    program     static C:\Pic\2016\9_6_2.asm    
+                  CRECVLP   0x00002c    program     static C:\Pic\2016\9_6_2.asm    
+                    CSEND   0x000036    program     static C:\Pic\2016\9_6_2.asm    
+                  CSENDLP   0x00003b    program     static C:\Pic\2016\9_6_2.asm    
+                      ERR   0x0000a3    program     static C:\Pic\2016\9_6_2.asm    
+                     LOOP   0x00004e    program     static C:\Pic\2016\9_6_2.asm    
+                  LOOP156   0x000048    program     static C:\Pic\2016\9_6_2.asm    
+                     MAIN   0x000019    program     static C:\Pic\2016\9_6_2.asm    
+                   MAINLP   0x000027    program     static C:\Pic\2016\9_6_2.asm    
+                  MOVEUP1   0x000091    program     static C:\Pic\2016\9_6_2.asm    
+                  MOVEUP2   0x000094    program     static C:\Pic\2016\9_6_2.asm    
+                      POP   0x000013    program     static C:\Pic\2016\9_6_2.asm    
+                     PUSH   0x000004    program     static C:\Pic\2016\9_6_2.asm    
+                     SEND   0x000097    program     static C:\Pic\2016\9_6_2.asm    
+                  SKPANS3   0x00009c    program     static C:\Pic\2016\9_6_2.asm    
+                  TIME104   0x00004c    program     static C:\Pic\2016\9_6_2.asm    
+                  TIME156   0x000046    program     static C:\Pic\2016\9_6_2.asm    
+                   URESET   0x0000ad    program     static C:\Pic\2016\9_6_2.asm    
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     PUSH   0x000004    program     static C:\Pic\2016\9_6_2.asm    
+                     BODY   0x000007    program     static C:\Pic\2016\9_6_2.asm    
+                      POP   0x000013    program     static C:\Pic\2016\9_6_2.asm    
+                     MAIN   0x000019    program     static C:\Pic\2016\9_6_2.asm    
+                   MAINLP   0x000027    program     static C:\Pic\2016\9_6_2.asm    
+                    CRECV   0x000028    program     static C:\Pic\2016\9_6_2.asm    
+                  CRECVLP   0x00002c    program     static C:\Pic\2016\9_6_2.asm    
+                    CSEND   0x000036    program     static C:\Pic\2016\9_6_2.asm    
+                  CSENDLP   0x00003b    program     static C:\Pic\2016\9_6_2.asm    
+                  TIME156   0x000046    program     static C:\Pic\2016\9_6_2.asm    
+                  LOOP156   0x000048    program     static C:\Pic\2016\9_6_2.asm    
+                  TIME104   0x00004c    program     static C:\Pic\2016\9_6_2.asm    
+                     LOOP   0x00004e    program     static C:\Pic\2016\9_6_2.asm    
+                    CHECK   0x000052    program     static C:\Pic\2016\9_6_2.asm    
+                  MOVEUP1   0x000091    program     static C:\Pic\2016\9_6_2.asm    
+                  MOVEUP2   0x000094    program     static C:\Pic\2016\9_6_2.asm    
+                     SEND   0x000097    program     static C:\Pic\2016\9_6_2.asm    
+                  SKPANS3   0x00009c    program     static C:\Pic\2016\9_6_2.asm    
+                      ERR   0x0000a3    program     static C:\Pic\2016\9_6_2.asm    
+                   URESET   0x0000ad    program     static C:\Pic\2016\9_6_2.asm    
+
+

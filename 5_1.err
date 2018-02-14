@@ -1,0 +1,2 @@
+Message[302] C:\PIC\2016\5_1.ASM 13 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\PIC\2016\5_1.ASM 23 : Using default destination of 1 (file).

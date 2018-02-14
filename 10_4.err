@@ -1,0 +1,8 @@
+Message[302] C:\PIC\2016\10_4.ASM 43 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 70 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 85 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 100 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\10_4.ASM 115 : Register in operand not in bank 0.  Ensure that bank bits are correct.

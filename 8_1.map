@@ -1,0 +1,42 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Oct 04 15:00:58 2017
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000038
+       .config_2007_8_1.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00001b      
+                            0x002007    0x002007      
+            29 out of 2310 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   ADLOOP   0x00000d    program     static C:\Pic\2016\8_1.asm      
+                  ADSTART   0x00000b    program     static C:\Pic\2016\8_1.asm      
+                     LOOP   0x000019    program     static C:\Pic\2016\8_1.asm      
+                     MAIN   0x000000    program     static C:\Pic\2016\8_1.asm      
+                  TIME20U   0x000016    program     static C:\Pic\2016\8_1.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000000    program     static C:\Pic\2016\8_1.asm      
+                  ADSTART   0x00000b    program     static C:\Pic\2016\8_1.asm      
+                   ADLOOP   0x00000d    program     static C:\Pic\2016\8_1.asm      
+                  TIME20U   0x000016    program     static C:\Pic\2016\8_1.asm      
+                     LOOP   0x000019    program     static C:\Pic\2016\8_1.asm      
+
+

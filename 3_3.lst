@@ -1,0 +1,200 @@
+MPASM  5.51                           3_3.ASM   5-7-2016  16:15:13         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001                 LIST    P=PIC16F84A
+                      00002                 INCLUDE "P16F84A.INC"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00003                 
+2007   3FFE           00004                 __CONFIG _HS_OSC
+                      00005                 
+  0000000C            00006 TMP0    EQU 0CH
+  0000000D            00007 TMP1    EQU 0DH
+                      00008 
+0000                  00009                 ORG 0H
+0000                  00010 MAIN
+0000   1683           00011                 BSF             STATUS, RP0             ;Bank 1 初期設定開始
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0001   0185           00012                 CLRF    TRISA                   ;PortA->Output
+0002   30FF           00013                 MOVLW   0FFH                    ;11111111->W    Wレジスタに0FFH(8進数)をぶち込む
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0003   0086           00014                 MOVWF   TRISB                   ;PortB->Input
+0004   1283           00015                 BCF             STATUS, RP0             ;Bank 0 設定終了
+0005   0185           00016                 CLRF    PORTA                   ;All RA->Low    RAをオールクリア
+0006                  00017 LOOP
+0006   0806           00018                 MOVF    PORTB, W                ;ポートBをWレジスタにぶち込む
+0007   390F           00019                 ANDLW   B'00001111'             ;RB(A)とWをANDしてWにぶち込む
+0008   008C           00020                 MOVWF   TMP0                    ;WをTMP0へ
+                      00021 
+0009   0806           00022                 MOVF    PORTB, W                ;ポートBをWレジスタにぶち込む
+000A   39F0           00023                 ANDLW   B'11110000'             ;RB(B)をWへ
+000B   008D           00024                 MOVWF   TMP1                    ;WをTMP1へ
+                      00025 
+000C   1003           00026                 BCF             STATUS, C               ;クリア
+000D   0C0D           00027                 RRF             TMP1,   W               ;WにTMP1を1ビットずらしたものをぶち込む
+000E   008D           00028                 MOVWF   TMP1                    ;WからTMP１に戻す
+000F   1003           00029                 BCF             STATUS, C               ;クリア
+0010   0C0D           00030                 RRF             TMP1,   W               ;Rotate Right TMP1 with C->M
+0011   008D           00031                 MOVWF   TMP1
+0012   1003           00032                 BCF             STATUS, C
+0013   0C0D           00033                 RRF             TMP1,   W               ;Rotate Right TMP1 with C->M
+0014   008D           00034                 MOVWF   TMP1
+0015   1003           00035                 BCF             STATUS, C
+0016   0C0D           00036                 RRF             TMP1,   W               ;Rotate Right TMP1 with C->M
+                      00037 
+0017   050C           00038                 ANDWF   TMP0,   W               ;TMP0とWをANDしてへW
+                      00039 
+0018   0085           00040                 MOVWF   PORTA
+0019   2806           00041                 GOTO    LOOP
+                      00042                 
+MPASM  5.51                           3_3.ASM   5-7-2016  16:15:13         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00043                 END
+MPASM  5.51                           3_3.ASM   5-7-2016  16:15:13         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000006
+MAIN                              00000000
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+MPASM  5.51                           3_3.ASM   5-7-2016  16:15:13         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0SE                              00000004
+TMP0                              0000000C
+TMP1                              0000000D
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+MPASM  5.51                           3_3.ASM   5-7-2016  16:15:13         PAGE  5
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXX------ ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    26
+Program Memory Words Free:   998
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

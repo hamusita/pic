@@ -1,0 +1,44 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu Jun 30 15:31:57 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x00004a
+       .config_2007_BCD.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000024      
+                            0x002007    0x002007      
+            38 out of 1094 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     BCDC   0x000000    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_2   0x000009    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_3   0x000017    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_4   0x00001d    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_5   0x000024    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_6   0x000011    program     static C:\Pic\2016\BCD.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     BCDC   0x000000    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_2   0x000009    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_6   0x000011    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_3   0x000017    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_4   0x00001d    program     static C:\Pic\2016\BCD.asm      
+                   BCDC_5   0x000024    program     static C:\Pic\2016\BCD.asm      
+
+

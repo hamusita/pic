@@ -1,0 +1,386 @@
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         LIST    P=PIC16F84A
+                      00002         #INCLUDE<P16F84A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00003         
+2007   3FF2           00004         __CONFIG        _HS_OSC&_CP_OFF&_WDT_OFF&_PWRTE_ON
+                      00005 ;****変数領域確保***********************************************************            
+  0000000C            00006 W_TEMP          EQU     0CH
+  0000000D            00007 STATUS_TEMP     EQU     0DH
+  0000000E            00008 TMP                     EQU     0EH
+                      00009 
+  0000000F            00010 COUNT           EQU 0FH
+  00000011            00011 NOW                     EQU 11H
+                      00012 
+  00000012            00013 OUTPUT1         EQU 12H
+  00000013            00014 OUTPUT2         EQU 13H
+                      00015 
+  00000014            00016 WORK            EQU 14H
+  00000015            00017 BCD1            EQU     15H
+  00000016            00018 BCD2            EQU     16H
+  00000017            00019 CNT                     EQU     17H
+                      00020 ;*************************************************************************              
+                      00021 
+0000                  00022         ORG     0H
+0000   286E           00023         GOTO    MAIN
+                      00024                 
+                      00025 ;****割り込み処理************************************************************           
+                      00026 
+0004                  00027         ORG             04H
+                      00028                 
+                      00029 ;PUSH
+0004   008C           00030         MOVWF   W_TEMP
+0005   0803           00031         MOVF    STATUS,W
+0006   008D           00032         MOVWF   STATUS_TEMP
+                      00033 
+0007   1B86           00034         BTFSC   PORTB,7
+0008   201F           00035         CALL    UNDER
+0009   1B06           00036         BTFSC   PORTB,6
+000A   2013           00037         CALL    OVER
+000B   0000           00038         NOP
+000C   0000           00039         NOP
+                      00040 
+000D   080D           00041         MOVF    STATUS_TEMP,W
+000E   0083           00042         MOVWF   STATUS
+000F   0E8C           00043         SWAPF   W_TEMP,F
+0010   0E0C           00044         SWAPF   W_TEMP,W
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0011   100B           00045         BCF             INTCON,RBIF     ;
+0012   0009           00046         RETFIE
+                      00047 
+                      00048 
+0013                  00049 OVER
+0013   0A8F           00050         INCF    COUNT,F
+0014   080F           00051         MOVF    COUNT,W
+0015   0094           00052         MOVWF   WORK
+0016   202A           00053         CALL    BCDC
+0017   1816           00054         BTFSC   BCD2,0
+0018   284C           00055         GOTO    OST
+0019   0A91           00056         INCF    NOW,F
+001A   0811           00057         MOVF    NOW,W
+001B   0094           00058         MOVWF   WORK
+001C   202A           00059         CALL    BCDC
+001D   2065           00060         CALL    OUTPUT
+                      00061 
+001E   0008           00062         RETURN
+                      00063                 
+001F                  00064 UNDER
+001F   0A8F           00065         INCF    COUNT,F
+0020   0B8F           00066         DECFSZ  COUNT,F
+0021   2823           00067         GOTO    UNDER2
+0022   2857           00068         GOTO    UST
+0023                  00069 UNDER2
+0023   038F           00070         DECF    COUNT,F
+0024   0391           00071         DECF    NOW,F
+0025   0811           00072         MOVF    NOW,W
+0026   0094           00073         MOVWF   WORK
+0027   202A           00074         CALL    BCDC
+0028   2065           00075         CALL    OUTPUT
+                      00076 
+0029   0008           00077         RETURN
+                      00078 
+002A                  00079 BCDC
+002A   0197           00080         CLRF    CNT
+002B   0195           00081         CLRF    BCD1
+002C   0196           00082         CLRF    BCD2
+002D   3008           00083         MOVLW   D'8'    ;8回繰り返す
+002E   0097           00084         MOVWF   CNT             ;CNT=8
+002F   1003           00085         BCF             STATUS,C
+0030                  00086 BCDC_2
+0030   0D94           00087         RLF             WORK,F   ;全体的に左に回す
+0031   0D95           00088         RLF             BCD1,F
+0032   0D96           00089         RLF             BCD2,F
+0033   1803           00090         BTFSC   STATUS,C ;DEC1に移動するビット(0=SKIP)
+0034   1415           00091         BSF             BCD1,0   ;C=1
+0035   0B97           00092         DECFSZ  CNT,F
+0036   2838           00093         GOTO    BCDC_6   ;LOOP<8
+0037   284B           00094         GOTO    BCDC_5   ;LOOP=8
+0038                  00095 BCDC_6
+0038   3003           00096         MOVLW   0x03     ;W=0x03
+0039   0795           00097         ADDWF   BCD1,F   ;[BCD1]+03H
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003A   1995           00098         BTFSC   BCD1,3   ;4bit => 5?
+003B   283E           00099         GOTO    BCDC_3   ;     => 5 (5~)
+003C   3003           00100         MOVLW   0x03     ;W=0x03
+003D   0295           00101         SUBWF   BCD1,F   ;[BCD1]-03H
+003E                  00102 BCDC_3
+003E   3030           00103         MOVLW   0x30     ;W=0x30
+003F   0795           00104         ADDWF   BCD1,F   ;[BCD1]+30H
+0040   1B95           00105         BTFSC   BCD1,7   ;8BIT =>5?
+0041   2844           00106         GOTO    BCDC_4   ;     =>5 (5~)
+0042   3030           00107         MOVLW   0x30     ;W=0x30
+0043   0295           00108         SUBWF   BCD1,F   ;[BCD1]-30H
+0044                  00109 BCDC_4
+0044   3003           00110         MOVLW   0x03     ;W=0x03
+0045   0796           00111         ADDWF   BCD2,F   ;[BCD2]-03H
+0046   1996           00112         BTFSC   BCD2,3   ;12BIT =>5?
+0047   2830           00113         GOTO    BCDC_2   ;      =>5 (5~)
+0048   3003           00114         MOVLW   0x03     ;W=0x03
+0049   0296           00115         SUBWF   BCD2,F   ;[BCD2]-03H
+004A   2830           00116         GOTO    BCDC_2
+004B                  00117 BCDC_5
+004B   0008           00118         RETURN
+                      00119         
+                      00120 
+004C                  00121 OST
+004C   018F           00122         CLRF    COUNT
+004D   0191           00123         CLRF    NOW
+004E   0195           00124         CLRF    BCD1
+004F   0196           00125         CLRF    BCD2
+                      00126 
+0050   2065           00127         CALL    OUTPUT
+                      00128 
+0051   080D           00129         MOVF    STATUS_TEMP,W
+0052   0083           00130         MOVWF   STATUS
+0053   0E8C           00131         SWAPF   W_TEMP,F
+0054   0E0C           00132         SWAPF   W_TEMP,W
+0055   100B           00133         BCF             INTCON,RBIF
+0056   0009           00134         RETFIE
+                      00135 
+0057                  00136 UST
+0057   3063           00137         MOVLW   D'99'
+0058   008F           00138         MOVWF   COUNT
+0059   3063           00139         MOVLW   D'99'
+005A   0091           00140         MOVWF   NOW
+005B   3063           00141         MOVLW   D'99'
+005C   0094           00142         MOVWF   WORK
+                      00143 
+005D   202A           00144         CALL    BCDC
+                      00145 
+005E   2065           00146         CALL    OUTPUT
+                      00147 
+005F   080D           00148         MOVF    STATUS_TEMP,W
+0060   0083           00149         MOVWF   STATUS
+0061   0E8C           00150         SWAPF   W_TEMP,F
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0062   0E0C           00151         SWAPF   W_TEMP,W
+0063   100B           00152         BCF             INTCON,RBIF
+0064   0009           00153         RETFIE
+                      00154 
+0065                  00155 OUTPUT
+0065   0815           00156         MOVF    BCD1,W
+0066   0086           00157         MOVWF   PORTB
+0067   0E15           00158         SWAPF   BCD1,W
+0068   1280           00159         BCF             W,5
+0069   0085           00160         MOVWF   PORTA
+006A   0008           00161         RETURN
+                      00162 
+006B                  00163 WAIT
+006B   0B94           00164         DECFSZ  WORK,F
+006C   286B           00165         GOTO    WAIT
+006D   0008           00166         RETURN
+                      00167         
+                      00168                 
+                      00169 ;****メイン処理**************************************************************           
+006E                  00170 MAIN
+006E   118B           00171         BCF             INTCON,RBIE     ;変化割り込み不許可
+006F   1683           00172         BSF             STATUS,RP0
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0070   0185           00173         CLRF    TRISA           ;PORTA output
+0071   30F0           00174         MOVLW   0F0H            ;
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0072   0086           00175         MOVWF   TRISB           ;RB7~4 INPUT
+0073   1283           00176         BCF             STATUS,RP0      ;
+0074   178B           00177         BSF             INTCON,GIE      ;割り込み許可
+0075   158B           00178         BSF             INTCON,RBIE     ;変化割り込み許可
+0076   0185           00179         CLRF    PORTA
+0077   0186           00180         CLRF    PORTB
+0078   018E           00181         CLRF    TMP
+0079   0191           00182         CLRF    NOW
+007A   018F           00183         CLRF    COUNT
+007B   0194           00184         CLRF    WORK
+                      00185                 
+007C                  00186 LOOP
+007C   0000           00187         NOP
+007D   287C           00188         GOTO    LOOP
+                      00189                 
+                      00190         END
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BCD1                              00000015
+BCD2                              00000016
+BCDC                              0000002A
+BCDC_2                            00000030
+BCDC_3                            0000003E
+BCDC_4                            00000044
+BCDC_5                            0000004B
+BCDC_6                            00000038
+C                                 00000000
+CNT                               00000017
+COUNT                             0000000F
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              0000007C
+MAIN                              0000006E
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+NOW                               00000011
+OPTION_REG                        00000081
+OST                               0000004C
+OUTPUT                            00000065
+OUTPUT1                           00000012
+OUTPUT2                           00000013
+OVER                              00000013
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+STATUS_TEMP                       0000000D
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMP                               0000000E
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+UNDER                             0000001F
+UNDER2                            00000023
+UST                               00000057
+W                                 00000000
+WAIT                              0000006B
+WORK                              00000014
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+W_TEMP                            0000000C
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+MPASM  5.51                           6_2.ASM   7-1-2016  15:38:33         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX--
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   123
+Program Memory Words Free:   901
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+

@@ -1,0 +1,82 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Dec 14 10:18:22 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0001ca
+       .config_2007_9_6.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x0000e8      
+                            0x002007    0x002007      
+            231 out of 1094 program addresses used, program memory utilization is 21%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      ADD   0x00008e    program     static C:\Pic\2016\9_6.asm      
+                ADDEXPORT   0x000092    program     static C:\Pic\2016\9_6.asm      
+                     BCDC   0x0000c4    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_2   0x0000cd    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_3   0x0000db    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_4   0x0000e1    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_5   0x0000e8    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_6   0x0000d5    program     static C:\Pic\2016\9_6.asm      
+                    CRECV   0x000026    program     static C:\Pic\2016\9_6.asm      
+                  CRECVLP   0x00002a    program     static C:\Pic\2016\9_6.asm      
+                    CSEND   0x000034    program     static C:\Pic\2016\9_6.asm      
+                  CSENDLP   0x000039    program     static C:\Pic\2016\9_6.asm      
+                   IMPORT   0x00006f    program     static C:\Pic\2016\9_6.asm      
+                    LOOP1   0x000046    program     static C:\Pic\2016\9_6.asm      
+                    LOOP2   0x00004c    program     static C:\Pic\2016\9_6.asm      
+                     MAIN   0x000010    program     static C:\Pic\2016\9_6.asm      
+                   MAINLP   0x000025    program     static C:\Pic\2016\9_6.asm      
+                   SETMIN   0x0000aa    program     static C:\Pic\2016\9_6.asm      
+                      SUB   0x0000a4    program     static C:\Pic\2016\9_6.asm      
+                SUBEXPORT   0x0000ad    program     static C:\Pic\2016\9_6.asm      
+                  TIME104   0x00004a    program     static C:\Pic\2016\9_6.asm      
+                  TIME156   0x000044    program     static C:\Pic\2016\9_6.asm      
+                      VAR   0x000050    program     static C:\Pic\2016\9_6.asm      
+                   VARSET   0x0000bb    program     static C:\Pic\2016\9_6.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000010    program     static C:\Pic\2016\9_6.asm      
+                   MAINLP   0x000025    program     static C:\Pic\2016\9_6.asm      
+                    CRECV   0x000026    program     static C:\Pic\2016\9_6.asm      
+                  CRECVLP   0x00002a    program     static C:\Pic\2016\9_6.asm      
+                    CSEND   0x000034    program     static C:\Pic\2016\9_6.asm      
+                  CSENDLP   0x000039    program     static C:\Pic\2016\9_6.asm      
+                  TIME156   0x000044    program     static C:\Pic\2016\9_6.asm      
+                    LOOP1   0x000046    program     static C:\Pic\2016\9_6.asm      
+                  TIME104   0x00004a    program     static C:\Pic\2016\9_6.asm      
+                    LOOP2   0x00004c    program     static C:\Pic\2016\9_6.asm      
+                      VAR   0x000050    program     static C:\Pic\2016\9_6.asm      
+                   IMPORT   0x00006f    program     static C:\Pic\2016\9_6.asm      
+                      ADD   0x00008e    program     static C:\Pic\2016\9_6.asm      
+                ADDEXPORT   0x000092    program     static C:\Pic\2016\9_6.asm      
+                      SUB   0x0000a4    program     static C:\Pic\2016\9_6.asm      
+                   SETMIN   0x0000aa    program     static C:\Pic\2016\9_6.asm      
+                SUBEXPORT   0x0000ad    program     static C:\Pic\2016\9_6.asm      
+                   VARSET   0x0000bb    program     static C:\Pic\2016\9_6.asm      
+                     BCDC   0x0000c4    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_2   0x0000cd    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_6   0x0000d5    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_3   0x0000db    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_4   0x0000e1    program     static C:\Pic\2016\9_6.asm      
+                   BCDC_5   0x0000e8    program     static C:\Pic\2016\9_6.asm      
+
+

@@ -1,0 +1,295 @@
+MPASM  5.51                           9_5.ASM   11-16-2016  18:29:06         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001                         LIST P=PIC16F84A
+                      00002                         #INCLUDE<P16F84A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00003                 
+2007   3FF2           00004                         __CONFIG _HS_OSC&_CP_OFF&_WDT_OFF&_PWRTE_ON
+                      00005 
+  0000000C            00006 W_TEMP          EQU             0CH
+  0000000D            00007 STATUS_TEMP     EQU             0DH
+  0000000E            00008 CNT1            EQU             0EH
+  0000000F            00009 CNTB            EQU             0FH
+  00000010            00010 TMPA            EQU             010H
+  00000011            00011 OUT                     EQU             011H
+  00000012            00012 IN                      EQU             012H
+                      00013 
+0000                  00014                         ORG             0H
+0000   2812           00015                         GOTO    MAIN
+                      00016                         
+0004                  00017                         ORG             04H
+                      00018 
+                      00019 ;PUSH
+0004   008C           00020                         MOVWF   W_TEMP
+0005   0803           00021                         MOVF    STATUS,W
+0006   008D           00022                         MOVWF   STATUS_TEMP
+                      00023 
+0007   201F           00024                         CALL    CRECV
+0008   0091           00025                         MOVWF   OUT
+0009   1291           00026                         BCF             OUT,5
+000A   0811           00027                         MOVF    OUT,W
+000B   202D           00028                         CALL    CSEND
+                      00029 
+                      00030 ;POP
+000C   080D           00031                         MOVF    STATUS_TEMP,W
+000D   0083           00032                         MOVWF   STATUS
+000E   0E8C           00033                         SWAPF   W_TEMP,F
+000F   0E0C           00034                         SWAPF   W_TEMP,W
+0010   108B           00035                         BCF             INTCON,INTF
+0011   0009           00036                         RETFIE
+                      00037 
+                      00038 ;REMAINING CODE GOES HERE
+                      00039 
+0012                  00040 MAIN
+0012   1683           00041                         BSF             STATUS,RP0
+0013   138B           00042                         BCF             INTCON,GIE
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   0185           00043                         CLRF    TRISA
+MPASM  5.51                           9_5.ASM   11-16-2016  18:29:06         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0015   300F           00044                         MOVLW   0FH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   0086           00045                         MOVWF   TRISB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0017   1301           00046                         BCF             OPTION_REG,INTEDG
+0018   1283           00047                         BCF             STATUS,RP0
+0019   0191           00048                         CLRF    OUT
+001A   0185           00049                         CLRF    PORTA
+001B   0186           00050                         CLRF    PORTB
+001C   178B           00051                         BSF             INTCON,GIE
+001D   160B           00052                         BSF             INTCON,INTE
+                      00053 
+001E                  00054 MAINLP
+001E   281E           00055                         GOTO    MAINLP
+                      00056 
+                      00057 
+001F                  00058 CRECV
+001F   0190           00059                         CLRF    TMPA
+0020   3008           00060                         MOVLW   08H
+0021   008F           00061                         MOVWF   CNTB
+0022   203D           00062                         CALL    TIME156
+                      00063 
+0023                  00064 CRECVLP
+0023   1806           00065                         BTFSC   PORTB,0
+0024   1403           00066                         BSF             STATUS,C
+0025   1C06           00067                         BTFSS   PORTB,0
+0026   1003           00068                         BCF             STATUS,C
+0027   0C90           00069                         RRF             TMPA,F
+0028   2043           00070                         CALL    TIME104
+0029   0B8F           00071                         DECFSZ  CNTB,F
+002A   2823           00072                         GOTO    CRECVLP
+002B   0810           00073                         MOVF    TMPA,W
+002C   0008           00074                         RETURN
+                      00075 
+002D                  00076 CSEND                   ;WREG->CHARACTOR CODE
+002D   0092           00077                         MOVWF   IN
+002E   3008           00078                         MOVLW   08H
+002F   008F           00079                         MOVWF   CNTB
+0030   1205           00080                         BCF             PORTA,4         ;START BIT
+0031   2043           00081                         CALL    TIME104         ;DELAY 104U
+0032                  00082 CSENDLP
+0032   1812           00083                         BTFSC   IN,0
+0033   1605           00084                         BSF             PORTA,4
+0034   1C12           00085                         BTFSS   IN,0
+0035   1205           00086                         BCF             PORTA,4
+0036   2043           00087                         CALL    TIME104
+0037   0C92           00088                         RRF             IN,F
+0038   0B8F           00089                         DECFSZ  CNTB,F
+0039   2832           00090                         GOTO    CSENDLP
+003A   1605           00091                         BSF             PORTA,4
+003B   2043           00092                         CALL    TIME104
+003C   0008           00093                         RETURN
+                      00094 
+MPASM  5.51                           9_5.ASM   11-16-2016  18:29:06         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+003D                  00095 TIME156
+003D   30C3           00096                         MOVLW   0C3H
+003E   008E           00097                         MOVWF   CNT1
+003F                  00098 LOOP1
+003F   0000           00099                         NOP
+0040   0B8E           00100                         DECFSZ  CNT1,F
+0041   283F           00101                         GOTO    LOOP1
+0042   0008           00102                         RETURN
+                      00103 
+0043                  00104 TIME104
+0043   3082           00105                         MOVLW   082H
+0044   008E           00106                         MOVWF   CNT1
+0045                  00107 LOOP2
+0045   0000           00108                         NOP
+0046   0B8E           00109                         DECFSZ  CNT1,F
+0047   2845           00110                         GOTO    LOOP2
+0048   0008           00111                         RETURN
+                      00112 
+                      00113                         END
+MPASM  5.51                           9_5.ASM   11-16-2016  18:29:06         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+CNT1                              0000000E
+CNTB                              0000000F
+CRECV                             0000001F
+CRECVLP                           00000023
+CSEND                             0000002D
+CSENDLP                           00000032
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+IN                                00000012
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP1                             0000003F
+LOOP2                             00000045
+MAIN                              00000012
+MAINLP                            0000001E
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OUT                               00000011
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+MPASM  5.51                           9_5.ASM   11-16-2016  18:29:06         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+STATUS_TEMP                       0000000D
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TIME104                           00000043
+TIME156                           0000003D
+TMPA                              00000010
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+W_TEMP                            0000000C
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+MPASM  5.51                           9_5.ASM   11-16-2016  18:29:06         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXX------- ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    70
+Program Memory Words Free:   954
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     3 reported,     0 suppressed
+
+

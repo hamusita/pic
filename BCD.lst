@@ -1,0 +1,224 @@
+MPASM  5.51                           BCD.ASM   6-30-2016  15:31:56         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         LIST    P=PIC16F84A
+                      00002         #INCLUDE<P16F84A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00003         
+2007   3FF2           00004         __CONFIG        _HS_OSC&_CP_OFF&_WDT_OFF&_PWRTE_ON
+                      00005 
+                      00006 ;****変数領域確保***********************************************************            
+  0000000C            00007 BIN             EQU     0CH
+  0000000D            00008 BCD1    EQU     0DH
+  0000000E            00009 BCD2    EQU     0EH
+  0000000F            00010 CNT             EQU     0FH
+                      00011 ;*************************************************************************
+                      00012 
+0000                  00013         ORG     0
+                      00014 
+0000                  00015 BCDC
+0000   018F           00016         CLRF    CNT
+0001   018C           00017         CLRF    BIN
+0002   018D           00018         CLRF    BCD1
+0003   018E           00019         CLRF    BCD2
+0004   3008           00020         MOVLW   D'8'     ;8回繰り返す
+0005   008F           00021         MOVWF   CNT      ;CNT=8
+0006   1003           00022         BCF             STATUS,C
+0007   30AA           00023         MOVLW   B'10101010'      ;ここに適当な数を入れる(255まで)
+0008   008C           00024         MOVWF   BIN      ;BIN=?
+0009                  00025 BCDC_2
+0009   0D8C           00026         RLF             BIN,F    ;全体的に左に回す
+000A   0D8D           00027         RLF             BCD1,F
+000B   0D8E           00028         RLF             BCD2,F
+000C   1803           00029         BTFSC   STATUS,C ;DEC1に移動するビット(0=SKIP)
+000D   140D           00030         BSF             BCD1,0   ;C=1
+000E   0B8F           00031         DECFSZ  CNT,F
+000F   2811           00032         GOTO    BCDC_6   ;LOOP<8
+0010   2824           00033         GOTO    BCDC_5   ;LOOP=8
+0011                  00034 BCDC_6
+0011   3003           00035         MOVLW   0x03     ;W=0x03
+0012   078D           00036         ADDWF   BCD1,F   ;[BCD1]+03H
+0013   198D           00037         BTFSC   BCD1,3   ;4bit => 5?
+0014   2817           00038         GOTO    BCDC_3   ;     => 5 (5~)
+0015   3003           00039         MOVLW   0x03     ;W=0x03
+0016   028D           00040         SUBWF   BCD1,F   ;[BCD1]-03H
+0017                  00041 BCDC_3
+0017   3030           00042         MOVLW   0x30     ;W=0x30
+0018   078D           00043         ADDWF   BCD1,F   ;[BCD1]+30H
+0019   1B8D           00044         BTFSC   BCD1,7   ;8BIT =>5?
+MPASM  5.51                           BCD.ASM   6-30-2016  15:31:56         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001A   281D           00045         GOTO    BCDC_4   ;     =>5 (5~)
+001B   3030           00046         MOVLW   0x30     ;W=0x30
+001C   028D           00047         SUBWF   BCD1,F   ;[BCD1]-30H
+001D                  00048 BCDC_4
+001D   3003           00049         MOVLW   0x03     ;W=0x03
+001E   078E           00050         ADDWF   BCD2,F   ;[BCD2]-03H
+001F   198E           00051         BTFSC   BCD2,3   ;12BIT =>5?
+0020   2809           00052         GOTO    BCDC_2   ;      =>5 (5~)
+0021   3003           00053         MOVLW   0x03     ;W=0x03
+0022   028E           00054         SUBWF   BCD2,F   ;[BCD2]-03H
+0023   2809           00055         GOTO    BCDC_2
+0024                  00056 BCDC_5
+0024   2824           00057         GOTO    BCDC_5
+                      00058 
+                      00059         END
+MPASM  5.51                           BCD.ASM   6-30-2016  15:31:56         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BCD1                              0000000D
+BCD2                              0000000E
+BCDC                              00000000
+BCDC_2                            00000009
+BCDC_3                            00000017
+BCDC_4                            0000001D
+BCDC_5                            00000024
+BCDC_6                            00000011
+BIN                               0000000C
+C                                 00000000
+CNT                               0000000F
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+MPASM  5.51                           BCD.ASM   6-30-2016  15:31:56         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+MPASM  5.51                           BCD.ASM   6-30-2016  15:31:56         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXX----------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    37
+Program Memory Words Free:   987
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

@@ -1,0 +1,350 @@
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001                 LIST    P=PIC16F84A
+                      00002                 #INCLUDE<P16F84A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+                      00003                 
+2007   3FF2           00004                 __CONFIG        _HS_OSC&_CP_OFF&_WDT_OFF&_PWRTE_ON
+                      00005                 
+  0000000C            00006 CNT1    EQU             0CH
+  0000000D            00007 CNT2    EQU             0DH
+  0000000E            00008 CNT3    EQU             0EH
+  0000000F            00009 TMP             EQU             0FH
+                      00010 
+0000                  00011                 ORG             0H
+0000                  00012 MAIN
+0000   1683           00013                 BSF             STATUS, RP0             ;bank1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0001   0186           00014                 CLRF    TRISB                   ;PORTB->Output
+0002   1283           00015                 BCF             STATUS, RP0             ;Bank0
+0003   0186           00016                 CLRF    PORTB                   ;PORTB->clear
+0004   018F           00017                 CLRF    TMP                             ;TMP->clear
+0005                  00018 MAINLP
+0005   080F           00019                 MOVF    TMP,    W
+0006   2024           00020                 CALL    BCD
+0007   0086           00021                 MOVWF   PORTB
+0008   201E           00022                 CALL    TIME01
+0009   0A0F           00023                 INCF    TMP,    W
+000A   008F           00024                 MOVWF   TMP
+000B   3C64           00025                 SUBLW   064H
+000C   1903           00026                 BTFSC   STATUS, Z
+000D   018F           00027                 CLRF    TMP
+000E   2805           00028                 GOTO    MAINLP
+                      00029 ;100us
+000F                  00030 TIME100U
+000F   30A5           00031                 MOVLW   0A5H
+0010   008C           00032                 MOVWF   CNT1
+0011   0000           00033                 NOP
+0012   0000           00034                 NOP
+0013                  00035 LOOP
+0013   0B8C           00036                 DECFSZ  CNT1,   F
+0014   2813           00037                 GOTO    LOOP
+0015   0008           00038                 RETURN
+                      00039                 
+                      00040 ;100ms
+0016                  00041 TIME10M
+0016   3063           00042                 MOVLW   063H
+0017   008D           00043                 MOVWF   CNT2
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0018   0000           00044                 NOP
+0019   0000           00045                 NOP
+001A                  00046 LOOP1
+001A   200F           00047                 CALL    TIME100U
+001B   0B8D           00048                 DECFSZ  CNT2,   F
+001C   281A           00049                 GOTO    LOOP1
+001D   0008           00050                 RETURN
+                      00051 
+                      00052 ;100ms
+001E                  00053 TIME01
+001E   300A           00054                 MOVLW   0AH
+001F   008E           00055                 MOVWF   CNT3
+0020                  00056 LOOP2
+0020   2016           00057                 CALL    TIME10M
+0021   0B8E           00058                 DECFSZ  CNT3,   F
+0022   2820           00059                 GOTO    LOOP2
+0023   0008           00060                 RETURN
+                      00061                 
+                      00062 ;BCD
+0024                  00063 BCD
+0024   39FF           00064                 ANDLW   0FFH
+0025   0782           00065                 ADDWF   PCL,    F
+0026   3400           00066                 RETLW   00H                     ;code0
+0027   3401           00067                 RETLW   01H                     ;code1
+0028   3402           00068                 RETLW   02H                     ;code2
+0029   3403           00069                 RETLW   03H                     ;code3  
+002A   3404           00070                 RETLW   04H                     ;code4
+002B   3405           00071                 RETLW   05H                     ;code5
+002C   3406           00072                 RETLW   06H                     ;code6
+002D   3407           00073                 RETLW   07H                     ;code7
+002E   3408           00074                 RETLW   08H                     ;code8  
+002F   3409           00075                 RETLW   09H                     ;code9
+0030   3410           00076                 RETLW   10H                     ;code0
+0031   3411           00077                 RETLW   11H                     ;code1
+0032   3412           00078                 RETLW   12H                     ;code2
+0033   3413           00079                 RETLW   13H                     ;code3  
+0034   3414           00080                 RETLW   14H                     ;code4
+0035   3415           00081                 RETLW   15H                     ;code5
+0036   3416           00082                 RETLW   16H                     ;code6
+0037   3417           00083                 RETLW   17H                     ;code7
+0038   3418           00084                 RETLW   18H                     ;code8  
+0039   3419           00085                 RETLW   19H                     ;code9
+003A   3420           00086                 RETLW   20H                     ;code0
+003B   3421           00087                 RETLW   21H                     ;code1
+003C   3422           00088                 RETLW   22H                     ;code2
+003D   3423           00089                 RETLW   23H                     ;code3  
+003E   3424           00090                 RETLW   24H                     ;code4
+003F   3425           00091                 RETLW   25H                     ;code5
+0040   3426           00092                 RETLW   26H                     ;code6
+0041   3427           00093                 RETLW   27H                     ;code7
+0042   3428           00094                 RETLW   28H                     ;code8  
+0043   3429           00095                 RETLW   29H                     ;code9
+0044   3430           00096                 RETLW   30H                     ;code0
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0045   3431           00097                 RETLW   31H                     ;code1
+0046   3432           00098                 RETLW   32H                     ;code2
+0047   3433           00099                 RETLW   33H                     ;code3  
+0048   3434           00100                 RETLW   34H                     ;code4
+0049   3435           00101                 RETLW   35H                     ;code5
+004A   3436           00102                 RETLW   36H                     ;code6
+004B   3437           00103                 RETLW   37H                     ;code7
+004C   3438           00104                 RETLW   38H                     ;code8  
+004D   3439           00105                 RETLW   39H                     ;code9
+004E   3440           00106                 RETLW   40H                     ;code0
+004F   3441           00107                 RETLW   41H                     ;code1
+0050   3442           00108                 RETLW   42H                     ;code2
+0051   3443           00109                 RETLW   43H                     ;code3  
+0052   3444           00110                 RETLW   44H                     ;code4
+0053   3445           00111                 RETLW   45H                     ;code5
+0054   3446           00112                 RETLW   46H                     ;code6
+0055   3447           00113                 RETLW   47H                     ;code7
+0056   3448           00114                 RETLW   48H                     ;code8  
+0057   3449           00115                 RETLW   49H                     ;code9
+0058   3450           00116                 RETLW   50H                     ;code0
+0059   3451           00117                 RETLW   51H                     ;code1
+005A   3452           00118                 RETLW   52H                     ;code2
+005B   3453           00119                 RETLW   53H                     ;code3  
+005C   3454           00120                 RETLW   54H                     ;code4
+005D   3455           00121                 RETLW   55H                     ;code5
+005E   3456           00122                 RETLW   56H                     ;code6
+005F   3457           00123                 RETLW   57H                     ;code7
+0060   3458           00124                 RETLW   58H                     ;code8  
+0061   3459           00125                 RETLW   59H                     ;code9
+0062   3460           00126                 RETLW   60H                     ;code0
+0063   3461           00127                 RETLW   61H                     ;code1
+0064   3462           00128                 RETLW   62H                     ;code2
+0065   3463           00129                 RETLW   63H                     ;code3  
+0066   3464           00130                 RETLW   64H                     ;code4
+0067   3465           00131                 RETLW   65H                     ;code5
+0068   3466           00132                 RETLW   66H                     ;code6
+0069   3467           00133                 RETLW   67H                     ;code7
+006A   3468           00134                 RETLW   68H                     ;code8  
+006B   3469           00135                 RETLW   69H                     ;code9
+006C   3470           00136                 RETLW   70H                     ;code0
+006D   3471           00137                 RETLW   71H                     ;code1
+006E   3472           00138                 RETLW   72H                     ;code2
+006F   3473           00139                 RETLW   73H                     ;code3  
+0070   3474           00140                 RETLW   74H                     ;code4
+0071   3475           00141                 RETLW   75H                     ;code5
+0072   3476           00142                 RETLW   76H                     ;code6
+0073   3477           00143                 RETLW   77H                     ;code7
+0074   3478           00144                 RETLW   78H                     ;code8  
+0075   3479           00145                 RETLW   79H                     ;code9
+0076   3480           00146                 RETLW   80H                     ;code0
+0077   3481           00147                 RETLW   81H                     ;code1
+0078   3482           00148                 RETLW   82H                     ;code2
+0079   3483           00149                 RETLW   83H                     ;code3  
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+007A   3484           00150                 RETLW   84H                     ;code4
+007B   3485           00151                 RETLW   85H                     ;code5
+007C   3486           00152                 RETLW   86H                     ;code6
+007D   3487           00153                 RETLW   87H                     ;code7
+007E   3488           00154                 RETLW   88H                     ;code8  
+007F   3489           00155                 RETLW   89H                     ;code9
+0080   3490           00156                 RETLW   90H                     ;code0
+0081   3491           00157                 RETLW   91H                     ;code1
+0082   3492           00158                 RETLW   92H                     ;code2
+0083   3493           00159                 RETLW   93H                     ;code3  
+0084   3494           00160                 RETLW   94H                     ;code4
+0085   3495           00161                 RETLW   95H                     ;code5
+0086   3496           00162                 RETLW   96H                     ;code6
+0087   3497           00163                 RETLW   97H                     ;code61
+0088   3498           00164                 RETLW   98H                     ;code62 
+0089   3499           00165                 RETLW   99H                     ;code63
+                      00166                 
+                      00167                 END
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BCD                               00000024
+C                                 00000000
+CNT1                              0000000C
+CNT2                              0000000D
+CNT3                              0000000E
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              00000013
+LOOP1                             0000001A
+LOOP2                             00000020
+MAIN                              00000000
+MAINLP                            00000005
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TIME01                            0000001E
+TIME100U                          0000000F
+TIME10M                           00000016
+TMP                               0000000F
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+MPASM  5.51                           7_1.ASM   10-5-2016  13:14:47         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXX------ ---------------- ---------------- ----------------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   138
+Program Memory Words Free:   886
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     1 reported,     0 suppressed
+
+

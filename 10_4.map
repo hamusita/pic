@@ -1,0 +1,66 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Jan 24 16:19:36 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x0000f2
+      .config_2007_10_4.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x00007c      
+                            0x002007    0x002007      
+            123 out of 2310 program addresses used, program memory utilization is 5%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  ADLOOP0   0x000023    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP1   0x00002f    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP2   0x00003b    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP3   0x000047    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART0   0x00001f    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART1   0x00002b    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART2   0x000037    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART3   0x000043    program     static C:\Pic\2016\10_4.asm     
+                    CSEND   0x000061    program     static C:\Pic\2016\10_4.asm     
+                  CSENDLP   0x000066    program     static C:\Pic\2016\10_4.asm     
+                    LOOP0   0x000074    program     static C:\Pic\2016\10_4.asm     
+                    LOOP1   0x000079    program     static C:\Pic\2016\10_4.asm     
+                     MAIN   0x00000e    program     static C:\Pic\2016\10_4.asm     
+                   MAINLP   0x00001d    program     static C:\Pic\2016\10_4.asm     
+                  TIME20U   0x000071    program     static C:\Pic\2016\10_4.asm     
+                   TIME52   0x000077    program     static C:\Pic\2016\10_4.asm     
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x00000e    program     static C:\Pic\2016\10_4.asm     
+                   MAINLP   0x00001d    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART0   0x00001f    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP0   0x000023    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART1   0x00002b    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP1   0x00002f    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART2   0x000037    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP2   0x00003b    program     static C:\Pic\2016\10_4.asm     
+                 ADSTART3   0x000043    program     static C:\Pic\2016\10_4.asm     
+                  ADLOOP3   0x000047    program     static C:\Pic\2016\10_4.asm     
+                    CSEND   0x000061    program     static C:\Pic\2016\10_4.asm     
+                  CSENDLP   0x000066    program     static C:\Pic\2016\10_4.asm     
+                  TIME20U   0x000071    program     static C:\Pic\2016\10_4.asm     
+                    LOOP0   0x000074    program     static C:\Pic\2016\10_4.asm     
+                   TIME52   0x000077    program     static C:\Pic\2016\10_4.asm     
+                    LOOP1   0x000079    program     static C:\Pic\2016\10_4.asm     
+
+

@@ -1,0 +1,54 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Nov 16 18:29:07 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000004    program   0x00008a
+       .config_2007_9_5.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000004    0x000048      
+                            0x002007    0x002007      
+            71 out of 1094 program addresses used, program memory utilization is 6%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    CRECV   0x00001f    program     static C:\Pic\2016\9_5.asm      
+                  CRECVLP   0x000023    program     static C:\Pic\2016\9_5.asm      
+                    CSEND   0x00002d    program     static C:\Pic\2016\9_5.asm      
+                  CSENDLP   0x000032    program     static C:\Pic\2016\9_5.asm      
+                    LOOP1   0x00003f    program     static C:\Pic\2016\9_5.asm      
+                    LOOP2   0x000045    program     static C:\Pic\2016\9_5.asm      
+                     MAIN   0x000012    program     static C:\Pic\2016\9_5.asm      
+                   MAINLP   0x00001e    program     static C:\Pic\2016\9_5.asm      
+                  TIME104   0x000043    program     static C:\Pic\2016\9_5.asm      
+                  TIME156   0x00003d    program     static C:\Pic\2016\9_5.asm      
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     MAIN   0x000012    program     static C:\Pic\2016\9_5.asm      
+                   MAINLP   0x00001e    program     static C:\Pic\2016\9_5.asm      
+                    CRECV   0x00001f    program     static C:\Pic\2016\9_5.asm      
+                  CRECVLP   0x000023    program     static C:\Pic\2016\9_5.asm      
+                    CSEND   0x00002d    program     static C:\Pic\2016\9_5.asm      
+                  CSENDLP   0x000032    program     static C:\Pic\2016\9_5.asm      
+                  TIME156   0x00003d    program     static C:\Pic\2016\9_5.asm      
+                    LOOP1   0x00003f    program     static C:\Pic\2016\9_5.asm      
+                  TIME104   0x000043    program     static C:\Pic\2016\9_5.asm      
+                    LOOP2   0x000045    program     static C:\Pic\2016\9_5.asm      
+
+

@@ -1,0 +1,3 @@
+Message[302] C:\PIC\2016\9_6.ASM 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\9_6.ASM 63 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\PIC\2016\9_6.ASM 64 : Register in operand not in bank 0.  Ensure that bank bits are correct.
